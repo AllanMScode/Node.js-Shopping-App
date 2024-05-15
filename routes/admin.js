@@ -4,32 +4,26 @@ const path = require("path");
 
 const express = require("express");
 
-const rootDir = require("../util/path");
+// Importing products controller
+const adminController = require("../controllers/admin");
 
 const router = express.Router();
 
 // products array for temporary use
-const products = [];
+// const products = [];
 
-// /admin/add-product (actual route)
-router.get("/add-product", (req, res, next) => {
-  res.render("add-product", {
-    pageTitle: "aDd pRoduct",
-    path: "/admin/add-product",
-    formsCSS: true,
-    productCSS: true,
-    activeAddProduct: true,
-  });
-});
+// /admin/add-product (actual route) => GET
+router.get("/add-product", adminController.getAddProduct);
 
-// /admin/add-product (actual route)
-router.post("/add-product", (req, res, next) => {
-  console.log(req.body);
-  products.push({ title: req.body.title });
-  res.redirect("/");
-});
+// we don't execute the above function (using getAddProduct()) but instead we store it (using getAddProduct, no parenthesis) so that when a request reaches this route, it should go ahead & execute it.
 
-// module.exports = router;
+// /admin/products => GET
+router.get("/products", adminController.getProducts);
 
-exports.routes = router;
-exports.products = products;
+// /admin/add-product (actual route) => POST
+router.post("/add-product", adminController.postAddProduct);
+
+module.exports = router;
+
+// exports.routes = router;
+// exports.products = products;

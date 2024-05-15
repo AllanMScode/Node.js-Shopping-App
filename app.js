@@ -5,8 +5,11 @@ const path = require("path");
 const express = require("express");
 const bodyParser = require("body-parser");
 
+// importing error controller
+const errorController = require("./controllers/error");
+
 // Importing admin routes
-const adminData = require("./routes/admin");
+const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 
 // creating an express application & storing in a constant named app
@@ -29,13 +32,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 // order matters (in the order of how they're imported)
-app.use("/admin", adminData.routes); //we can add this filter if all admin routes will start with /admin
+app.use("/admin", adminRoutes); //we can add this filter if all admin routes will start with /admin
 app.use(shopRoutes);
 
 // if none of the above routes are selected we add a default route for 404 page below
-app.use((req, res, next) => {
-  res.status(404).render("404", { pageTitle: "PagE nOt foUNd" });
-});
+app.use(errorController.get404);
 
 // use is a method which is defined by the express framework.
 // use() allows us to add a new middleware function

@@ -30,10 +30,11 @@
                                 <br>
                                 <p class="card-text">$<%= product.price %></p>
                                 <p class="card-text"><%= product.description %></p>
-                                <div class="text-center">
-                                    <form action="/add-to-cart" method="post">
-                                        <button class="btn btn-sm btn-outline-success">Add to Cart</button>
-                                    </form>
+                                <div class="d-flex justify-content-center">
+                                    <a href="/products/<%= product.id %>"
+                                        class="btn btn-sm btn-outline-info me-1">Details</a>
+                                    <!-- in the below code, inclute is running in a loop -->
+                                    <%- include('../includes/add-to-cart.ejs', {product: product}) %>
                                 </div>
                             </div>
                         </div>

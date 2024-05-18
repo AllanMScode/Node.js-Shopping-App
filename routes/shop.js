@@ -14,7 +14,12 @@ router.get("/", shopController.getIndex);
 
 router.get("/products", shopController.getProducts);
 
+// the colon : signals to express that whatever is after the colon can be anything.
+router.get("/products/:productId", shopController.getProduct);
+
 router.get("/cart", shopController.getCart);
+
+router.post("/cart", shopController.postCart);
 
 router.get("/orders", shopController.getOrders);
 

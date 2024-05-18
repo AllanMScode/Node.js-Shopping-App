@@ -29,9 +29,7 @@
                                 <p class="card-text">$<%= product.price %></p>
                                 <p class="card-text"><%= product.description %></p>
                                 <div class="text-center">
-                                    <form action="/add-to-cart" method="post">
-                                        <button class="btn btn-sm btn-outline-success">Add to Cart</button>
-                                    </form>
+                                    <%- include('../includes/add-to-cart.ejs', {product: product}) %>
                                 </div>
                             </div>
                         </div>
